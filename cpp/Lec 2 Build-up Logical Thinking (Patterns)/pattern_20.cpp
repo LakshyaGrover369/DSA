@@ -1,42 +1,75 @@
-// Pattern 20 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+// *       *
+// **     **
+// ***   ***
+// **** ****
+// *********
+// **** ****
+// ***   ***
+// **     **
+// *       *
+
+// BRUTE FORCE
+#include <iostream>
+#include <string>
 using namespace std;
-
-// Default N used for demonstration
-const int N = 5;
-
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+int main()
+{
+    int n = 5;
+    // Upper half
+    for (int i = 1; i <= n; i++)
+    {
+        string stars(i, '*');
+        string spaces(2 * (n - i), ' ');
+        cout << stars << spaces << stars << endl;
     }
+    // Lower half
+    for (int i = n - 1; i >= 1; i--)
+    {
+        string stars(i, '*');
+        string spaces(2 * (n - i), ' ');
+        cout << stars << spaces << stars << endl;
+    }
+    return 0;
 }
 
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
+// BETTER
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    for (int i = 1; i <= 2 * n - 1; i++)
+    {
+        int row = (i <= n) ? i : 2 * n - i;
+        string stars(row, '*');
+        string spaces(2 * (n - row), ' ');
+        cout << stars << spaces << stars << '\n';
+    }
+    return 0;
 }
 
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
+// BEST
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+int main()
+{
+    int n = 5;
+    vector<string> half;
 
-int main() {
-    cout << "=== Pattern 20 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
+    // Build upper half
+    for (int i = 1; i <= n; i++)
+    {
+        string row = string(i, '*') + string(2 * (n - i), ' ') + string(i, '*');
+        half.push_back(row);
+    }
+
+    // Print upper half + mirrored lower half
+    for (const auto &row : half)
+        cout << row << '\n';
+    for (auto it = half.rbegin() + 1; it != half.rend(); ++it)
+        cout << *it << '\n';
     return 0;
 }

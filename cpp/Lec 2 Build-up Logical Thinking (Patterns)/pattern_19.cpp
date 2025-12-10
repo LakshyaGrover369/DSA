@@ -1,42 +1,96 @@
-// Pattern 19 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+
+// **********
+// ***    ***
+// **      **
+// *        *
+// *        *
+// **      **
+// ***    ***
+// **********
+
+// BRUTE FORCE
+#include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
-
-// Default N used for demonstration
-const int N = 5;
-
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+int main()
+{
+    int n = 5;
+    // Upper half
+    for (int i = n; i > 1; i--)
+    {
+        string stars(i, '*');
+        string spaces(2 * (n - i), ' ');
+        cout << stars << spaces << stars << endl;
     }
+    // Lower half
+    for (int i = 1; i <= n; i++)
+    {
+        string stars(i, '*');
+        string spaces(2 * (n - i), ' ');
+        cout << stars << spaces << stars << endl;
+    }
+
+    cout << endl;
+    return 0;
 }
 
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
+// BETTER APPROACH
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+int main()
+{
+    int n = 5;
+    vector<string> rows;
+
+    // upper half
+    for (int i = n; i > 1; i--)
+    {
+        string stars(i, '*');
+        string spaces(2 * (n - i), ' ');
+        rows.push_back(stars + spaces + stars);
+    }
+
+    // lower half
+    for (int i = 1; i <= n; i++)
+    {
+        string stars(i, '*');
+        string spaces(2 * (n - i), ' ');
+        rows.push_back(stars + spaces + stars);
+    }
+
+    // Output all rows
+    for (string r : rows)
+        cout << r << endl;
+
+    cout << endl;
+    return 0;
 }
 
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
+// BEST APPROACH
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
 
-int main() {
-    cout << "=== Pattern 19 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
+    for (int k = 0; k < 2 * n - 1; k++)
+    {
+        int i;
+
+        // Map upper half and lower half
+        if (k < n - 1)
+            i = n - k;
+        else
+            i = k - (n - 2);
+
+        string stars(i, '*');
+        string spaces(2 * (n - i), ' ');
+        cout << stars << spaces << stars << endl;
+    }
+
     return 0;
 }

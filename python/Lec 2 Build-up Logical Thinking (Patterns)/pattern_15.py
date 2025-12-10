@@ -1,33 +1,26 @@
-# Pattern 15 - Striver's Sheet (three approaches)
-# Brute Force -> Better -> Best
+# ABCDE
+# ABCD
+# ABC
+# AB
+# A
 
-N = 5
+# BRUTE FORCE
+n = 5
+for i in range(n, 0, -1):
+    line = ""
+    for j in range(i):
+        line += chr(ord('A') + j)
+    print(line)
 
-# Approach 1: Brute Force - straightforward nested loops
-def brute_force():
-    print("Brute Force (N={}):".format(N))
-    for i in range(N):
-        for j in range(N):
-            print('*', end='')
-        print()
+# BETTER
+n = 5
+s = "ABCDE"
+for i in range(n, 0, -1):
+    print(s[:i])
 
-# Approach 2: Better - use precomputed row to reduce repeated concatenation
-def better():
-    print("Better (N={}):".format(N))
-    row = '*' * N
-    for _ in range(N):
-        print(row)
-
-# Approach 3: Best - concise / pythonic
-def best():
-    print("Best (N={}):".format(N))
-    for _ in range(N):
-        print('*' * N)
-
-if __name__ == '__main__':
-    print("=== Pattern 15 demo ===")
-    brute_force()
-    print()
-    better()
-    print()
-    best()
+# BEST
+n = 5
+s = "ABCDE"
+while s:
+    print(s)
+    s = s[:-1]

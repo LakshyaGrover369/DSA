@@ -1,33 +1,39 @@
-# Pattern 07 - Striver's Sheet (three approaches)
-# Brute Force -> Better -> Best
+#     *
+#    ***
+#   *****
+#  *******
+# *********
 
-N = 5
 
-# Approach 1: Brute Force - straightforward nested loops
-def brute_force():
-    print("Brute Force (N={}):".format(N))
-    for i in range(N):
-        for j in range(N):
-            print('*', end='')
-        print()
+#----------------------------------
+#  BRUTE FORCE APPROACH
+# ----------------------------------
+n = 5
+for i in range(1, n + 1):
+    line = ""
+    # Add spaces
+    for j in range(n - i):
+        line += " "  # O(n²) string copying
+    # Add stars
+    for k in range(2 * i - 1):
+        line += "*"
+    print(line)
 
-# Approach 2: Better - use precomputed row to reduce repeated concatenation
-def better():
-    print("Better (N={}):".format(N))
-    row = '*' * N
-    for _ in range(N):
-        print(row)
+# ----------------------------------
+# BETTER APPROACH (String multiplication)
+# ----------------------------------
 
-# Approach 3: Best - concise / pythonic
-def best():
-    print("Best (N={}):".format(N))
-    for _ in range(N):
-        print('*' * N)
+n = 5
+for i in range(1, n + 1):
+    spaces = " " * (n - i)
+    stars = "*" * (2 * i - 1)
+    print(spaces + stars)
 
-if __name__ == '__main__':
-    print("=== Pattern 07 demo ===")
-    brute_force()
-    print()
-    better()
-    print()
-    best()
+# ----------------------------------
+#  BEST APPROACH (List comprehension)
+# ----------------------------------
+n = 5
+print('\n'.join([
+    " " * (n - i) + "*" * (2 * i - 1) 
+    for i in range(1, n + 1)
+]))

@@ -1,42 +1,60 @@
-// Pattern 21 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+// *****
+// *   *
+// *   *
+// *   *
+// *****
+
+// BRUTE FORCE
+#include <iostream>
 using namespace std;
-
-// Default N used for demonstration
-const int N = 5;
-
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+int main()
+{
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            if (i == 1 || i == n || j == 1 || j == n)
+                cout << "*";
+            else
+                cout << " ";
+        }
+        cout << endl;
     }
+    return 0;
 }
 
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
+// BETTER
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    string border(n, '*');
+    string middle = "*" + string(n - 2, ' ') + "*";
+
+    cout << border << endl;
+    for (int i = 0; i < n - 2; i++)
+    {
+        cout << middle << endl;
+    }
+    cout << border << endl;
+    return 0;
 }
 
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
+// BEST
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    string border(n, '*');
+    string middle = "*" + string(n - 2, ' ') + "*";
 
-int main() {
-    cout << "=== Pattern 21 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
+    cout << border << '\n';
+    cout << string(n - 2, middle + '\n');
+    cout << border << '\n';
     return 0;
 }

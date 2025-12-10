@@ -1,33 +1,55 @@
-# Pattern 19 - Striver's Sheet (three approaches)
-# Brute Force -> Better -> Best
+# **********
+# ***    ***
+# **      **
+# *        *
+# *        *
+# **      **
+# ***    ***
+# **********
 
-N = 5
+# BRUTE FORCE
+n = 5
+# Upper half
+for i in range(n , 1 , -1):
+    stars = "*" * i
+    spaces = " " * (2 * (n - i))
+    print(f"{stars}{spaces}{stars}")
+# Lower half
+for i in range(1 , n+1 ):
+    stars = "*" * i
+    spaces = " " * (2 * (n - i))
+    print(f"{stars}{spaces}{stars}")
+    
+# BETTER APPROACH
+n = 5
+rows = []
 
-# Approach 1: Brute Force - straightforward nested loops
-def brute_force():
-    print("Brute Force (N={}):".format(N))
-    for i in range(N):
-        for j in range(N):
-            print('*', end='')
-        print()
+# upper half
+for i in range(n, 1, -1):
+    stars = "*" * i
+    spaces = " " * (2 * (n - i))
+    rows.append(f"{stars}{spaces}{stars}")
 
-# Approach 2: Better - use precomputed row to reduce repeated concatenation
-def better():
-    print("Better (N={}):".format(N))
-    row = '*' * N
-    for _ in range(N):
-        print(row)
+# lower half
+for i in range(1, n + 1):
+    stars = "*" * i
+    spaces = " " * (2 * (n - i))
+    rows.append(f"{stars}{spaces}{stars}")
+    
+# Output all rows
+for r in rows:
+    print(r)
+    
+# BEST APPROACH
+n = 5
 
-# Approach 3: Best - concise / pythonic
-def best():
-    print("Best (N={}):".format(N))
-    for _ in range(N):
-        print('*' * N)
+for k in range(2 * n - 1):
+    # Map 0..(n-2) → n..2 and (n-1)..(2n-2) → 1..n
+    if k < n - 1:
+        i = n - k
+    else:
+        i = k - (n - 2)
 
-if __name__ == '__main__':
-    print("=== Pattern 19 demo ===")
-    brute_force()
-    print()
-    better()
-    print()
-    best()
+    stars = "*" * i
+    spaces = " " * (2 * (n - i))
+    print(f"{stars}{spaces}{stars}")

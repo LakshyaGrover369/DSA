@@ -1,42 +1,52 @@
-// Pattern 04 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+// 1
+// 22
+// 333
+// 4444
+// 55555
+
+// BRUTE FORCE
+#include <iostream>
 using namespace std;
-
-// Default N used for demonstration
-const int N = 5;
-
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+int main()
+{
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            cout << i;
+        }
+        cout << endl;
     }
+    return 0;
 }
 
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
+// BETTER
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        cout << string(i, '0' + i) << endl;
+    }
+    return 0;
 }
 
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
-
-int main() {
-    cout << "=== Pattern 04 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
+// BEST (Most efficient)
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    string s;
+    for (int i = 1; i <= n; i++)
+    {
+        s.assign(i, '0' + i); // Direct fill
+        cout << s << '\n';
+    }
     return 0;
 }

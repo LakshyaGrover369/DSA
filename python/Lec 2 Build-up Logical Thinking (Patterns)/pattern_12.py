@@ -1,33 +1,40 @@
-# Pattern 12 - Striver's Sheet (three approaches)
-# Brute Force -> Better -> Best
+# 1      1
+# 12    21
+# 123  321
+# 12344321
 
-N = 5
+#----------------------------------
+# BRUTE FORCE APPROACH
+#----------------------------------
+n = 4
+for i in range(1, n + 1):
+    # Left part
+    line = ''.join(str(j) for j in range(1, i + 1))
+    # Middle spaces
+    line += ' ' * (2 * (n - i))
+    # Right part (reverse)
+    line += ''.join(str(j) for j in range(i, 0, -1))
+    print(line)
 
-# Approach 1: Brute Force - straightforward nested loops
-def brute_force():
-    print("Brute Force (N={}):".format(N))
-    for i in range(N):
-        for j in range(N):
-            print('*', end='')
-        print()
+#----------------------------------
+# BETTER APPROACH (String multiplication)
+#----------------------------------
+n = 4
+for i in range(1, n + 1):
+    left = ''.join(str(j) for j in range(1, i + 1))
+    right = ''.join(str(j) for j in range(i, 0, -1))
+    print(f"{left}{' ' * (2 * (n - i))}{right}")
 
-# Approach 2: Better - use precomputed row to reduce repeated concatenation
-def better():
-    print("Better (N={}):".format(N))
-    row = '*' * N
-    for _ in range(N):
-        print(row)
-
-# Approach 3: Best - concise / pythonic
-def best():
-    print("Best (N={}):".format(N))
-    for _ in range(N):
-        print('*' * N)
-
-if __name__ == '__main__':
-    print("=== Pattern 12 demo ===")
-    brute_force()
-    print()
-    better()
-    print()
-    best()
+#----------------------------------
+# BEST APPROACH (Single generator expression)
+#----------------------------------
+n = 4
+width = 2 * n
+for i in range(1, n + 1):
+    # Create row with list comprehension
+    row = [' '] * width
+    # Fill left and right
+    for j in range(1, i + 1):
+        row[j - 1] = str(j)
+        row[width - j] = str(j)
+    print(''.join(row))

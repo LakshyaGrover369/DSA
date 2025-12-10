@@ -1,42 +1,57 @@
-// Pattern 05 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+// *****
+// ****
+// ***
+// **
+// *
+// //----------------------------------
+// // BRUTE FORCE APPROACH (Nested loops)
+// //----------------------------------
+#include <iostream>
 using namespace std;
-
-// Default N used for demonstration
-const int N = 5;
-
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+int main()
+{
+    int n = 5;
+    for (int i = n; i >= 1; i--)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            cout << "★";
+        }
+        cout << endl;
     }
+    return 0;
 }
 
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
+//----------------------------------
+// BETTER APPROACH (String constructor)
+//----------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    for (int i = n; i >= 1; i--)
+    {
+        cout << string(i, '*') << endl;
+    }
+    return 0;
 }
 
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
-
-int main() {
-    cout << "=== Pattern 05 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
+// //----------------------------------
+// // BEST APPROACH (Single loop, pre-allocated)
+// //----------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    string s(n, '*');
+    for (int i = 0; i < n; i++)
+    {
+        cout << s << '\n';
+        s.pop_back(); // Remove last character
+    }
     return 0;
 }

@@ -1,42 +1,74 @@
-// Pattern 07 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+//     *
+//    ***
+//   *****
+//  *******
+// *********
+
+//----------------------------------
+// BRUTE FORCE APPROACH (Nested loops)
+//----------------------------------
+#include <iostream>
 using namespace std;
-
-// Default N used for demonstration
-const int N = 5;
-
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+int main()
+{
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        // Print spaces
+        for (int j = 1; j <= n - i; j++)
+        {
+            cout << " ";
+        }
+        // Print stars
+        for (int k = 1; k <= 2 * i - 1; k++)
+        {
+            cout << "*";
+        }
+        cout << endl;
     }
+    return 0;
 }
 
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
+//----------------------------------
+// BETTER APPROACH (String constructors)
+//----------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        string spaces(n - i, ' ');
+        string stars(2 * i - 1, '*');
+        cout << spaces << stars << endl;
+    }
+    return 0;
 }
 
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
+//----------------------------------
+// BEST APPROACH (Single pre-allocated string)
+//----------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    string line(n + 4, ' '); // Maximum width: n-1 spaces + (2*n-1) stars
 
-int main() {
-    cout << "=== Pattern 07 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
+    for (int i = 1; i <= n; i++)
+    {
+        int spaces = n - i;
+        int stars = 2 * i - 1;
+
+        // Fill line efficiently
+        fill(line.begin(), line.begin() + spaces, ' ');
+        fill(line.begin() + spaces, line.begin() + spaces + stars, '*');
+        line[spaces + stars] = '\0'; // Null terminate for puts
+
+        puts(line.c_str());
+    }
     return 0;
 }

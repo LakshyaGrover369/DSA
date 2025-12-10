@@ -1,33 +1,32 @@
-# Pattern 18 - Striver's Sheet (three approaches)
-# Brute Force -> Better -> Best
+# E
+# DE
+# CDE
+# BCDE
+# ABCDE
 
-N = 5
+#----------------------------------
+# BRUTE FORCE APPROACH
+#----------------------------------
+start = 'E'
+n = 5
+for i in range(1, n + 1):
+    line = ""
+    for j in range(1, i + 1):
+        line += chr(ord(start) - i + j)
+    print(line)
 
-# Approach 1: Brute Force - straightforward nested loops
-def brute_force():
-    print("Brute Force (N={}):".format(N))
-    for i in range(N):
-        for j in range(N):
-            print('*', end='')
-        print()
+#----------------------------------
+# BETTER APPROACH (String multiplication)
+#----------------------------------
+start = 'E'
+n = 5
+for i in range(1, n + 1):
+    row = "".join(chr(ord(start) - i + j) for j in range(1, i + 1))
+    print(row)
 
-# Approach 2: Better - use precomputed row to reduce repeated concatenation
-def better():
-    print("Better (N={}):".format(N))
-    row = '*' * N
-    for _ in range(N):
-        print(row)
-
-# Approach 3: Best - concise / pythonic
-def best():
-    print("Best (N={}):".format(N))
-    for _ in range(N):
-        print('*' * N)
-
-if __name__ == '__main__':
-    print("=== Pattern 18 demo ===")
-    brute_force()
-    print()
-    better()
-    print()
-    best()
+#----------------------------------
+# BEST APPROACH (List comprehension)
+#----------------------------------
+start = 'E'
+n = 5
+print("\n".join("".join(chr(ord(start) - i + j) for j in range(1, i + 1)) for i in range(1, n + 1)))

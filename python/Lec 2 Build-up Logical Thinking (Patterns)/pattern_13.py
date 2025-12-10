@@ -1,33 +1,43 @@
-# Pattern 13 - Striver's Sheet (three approaches)
-# Brute Force -> Better -> Best
+# 1
+# 2 3
+# 4 5 6
+# 7 8 9 10
+# 11 12 13 14 15
 
-N = 5
+#----------------------------------
+# BRUTE FORCE APPROACH
+#----------------------------------
+n = 5
+num = 1
 
-# Approach 1: Brute Force - straightforward nested loops
-def brute_force():
-    print("Brute Force (N={}):".format(N))
-    for i in range(N):
-        for j in range(N):
-            print('*', end='')
-        print()
-
-# Approach 2: Better - use precomputed row to reduce repeated concatenation
-def better():
-    print("Better (N={}):".format(N))
-    row = '*' * N
-    for _ in range(N):
-        print(row)
-
-# Approach 3: Best - concise / pythonic
-def best():
-    print("Best (N={}):".format(N))
-    for _ in range(N):
-        print('*' * N)
-
-if __name__ == '__main__':
-    print("=== Pattern 13 demo ===")
-    brute_force()
+for i in range(1, n + 1):
+    for j in range(1, i + 1):
+        print(num, end=" ")
+        num += 1
     print()
-    better()
-    print()
-    best()
+
+
+#----------------------------------
+# BETTER APPROACH (Using string building)
+#----------------------------------
+n = 5
+num = 1
+
+for i in range(1, n + 1):
+    s = ""
+    for j in range(1, i + 1):
+        s += str(num) + " "
+        num += 1
+    print(s)
+
+
+#----------------------------------
+# BEST APPROACH (Correct + Efficient)
+#----------------------------------
+n = 5
+num = 1
+
+for i in range(1, n + 1):
+    row = " ".join(str(num + k) for k in range(i))
+    num += i
+    print(row)

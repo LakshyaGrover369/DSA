@@ -1,42 +1,98 @@
-// Pattern 22 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+// 4444444
+// 4333334
+// 4322234
+// 4321234
+// 4322234
+// 4333334
+// 4444444
+
+//----------------------------------
+// BRUTE FORCE APPROACH (Nested loops)
+//----------------------------------
+#include <iostream>
+#include <algorithm>
 using namespace std;
 
-// Default N used for demonstration
-const int N = 5;
+int main()
+{
+    int n = 4;
+    int size = 2 * n - 1;
 
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+    for (int i = 1; i <= size; i++)
+    {
+        for (int j = 1; j <= size; j++)
+        {
+            int dist = min({i - 1, j - 1, size - i, size - j});
+            cout << n - dist;
+        }
+        cout << endl;
     }
+    return 0;
 }
 
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
+//----------------------------------
+// BETTER APPROACH (String building per row)
+//----------------------------------
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int n = 4;
+    int size = 2 * n - 1;
+    string line;
+
+    for (int i = 1; i <= size; i++)
+    {
+        line.clear();
+        line.reserve(size);
+
+        for (int j = 1; j <= size; j++)
+        {
+            int dist = min({i - 1, j - 1, size - i, size - j});
+            line += char('0' + n - dist);
+        }
+        cout << line << '\n';
+    }
+    return 0;
 }
 
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
+//----------------------------------
+// BEST APPROACH (Pre-calculated distances + buffer reuse)
+//----------------------------------
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
 
-int main() {
-    cout << "=== Pattern 22 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
+int main()
+{
+    int n = 4;
+    int size = 2 * n - 1;
+    string row;
+    row.reserve(size);
+
+    // Pre-calculate distances to border for each index
+    int dist[15];
+    for (int i = 0; i < size; i++)
+    {
+        dist[i] = min(i, size - 1 - i);
+    }
+
+    // Build each row using pre-calculated distances
+    for (int i = 0; i < size; i++)
+    {
+        row.clear();
+        int dist_i = dist[i];
+
+        for (int j = 0; j < size; j++)
+        {
+            int min_dist = min(dist_i, dist[j]);
+            row += char('0' + n - min_dist);
+        }
+        cout << row << '\n';
+    }
     return 0;
 }

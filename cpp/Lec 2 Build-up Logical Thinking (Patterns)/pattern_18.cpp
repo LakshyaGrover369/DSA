@@ -1,42 +1,72 @@
-// Pattern 18 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+// E
+// DE
+// CDE
+// BCDE
+// ABCDE
+
+//----------------------------------
+// BRUTE FORCE APPROACH (Nested loops)
+//----------------------------------
+#include <iostream>
 using namespace std;
 
-// Default N used for demonstration
-const int N = 5;
-
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+int main()
+{
+    char start = 'E';
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            cout << char(start - i + j);
+        }
+        cout << endl;
     }
+    return 0;
 }
 
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
+//----------------------------------
+// BETTER APPROACH (String constructor)
+//----------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    char start = 'E';
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        string row;
+        for (int j = 1; j <= i; j++)
+        {
+            row += char(start - i + j);
+        }
+        cout << row << endl;
+    }
+    return 0;
 }
 
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
+//----------------------------------
+// BEST APPROACH (Single pre-allocated string)
+//----------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
 
-int main() {
-    cout << "=== Pattern 18 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
+int main()
+{
+    char start = 'E';
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        string row(i, ' ');
+        for (int j = 1; j <= i; j++)
+        {
+            row[j - 1] = char(start - i + j);
+        }
+        cout << row << endl;
+    }
     return 0;
 }

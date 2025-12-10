@@ -1,42 +1,64 @@
-// Pattern 03 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+// 1
+// 12
+// 123
+// 1234
+// 12345
+
+//----------------------------------
+// BRUTE FORCE APPROACH
+//----------------------------------
+#include <iostream>
 using namespace std;
-
-// Default N used for demonstration
-const int N = 5;
-
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+int main()
+{
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            cout << j;
+        }
+        cout << endl;
     }
+    return 0;
 }
 
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
+//----------------------------------
+// BETTER APPROACH (Using string building)
+//----------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    for (int i = 1; i <= n; i++)
+    {
+        string s = "";
+        for (int j = 1; j <= i; j++)
+        {
+            s += to_string(j);
+        }
+        cout << s << endl;
+    }
+    return 0;
 }
 
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
-
-int main() {
-    cout << "=== Pattern 03 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
+//----------------------------------
+// BEST APPROACH (Single pass with pre-allocation)
+//----------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    string s;
+    s.reserve(15); // Pre-allocate memory
+    for (int i = 1; i <= n; i++)
+    {
+        s += to_string(i);
+        cout << s << '\n';
+    }
     return 0;
 }

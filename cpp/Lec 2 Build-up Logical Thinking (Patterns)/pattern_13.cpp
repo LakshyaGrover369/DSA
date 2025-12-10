@@ -1,42 +1,74 @@
-// Pattern 13 - Striver's Sheet (three approaches)
-// Brute Force -> Better -> Best
-#include <bits/stdc++.h>
+// 1
+// 2 3
+// 4 5 6
+// 7 8 9 10
+// 11 12 13 14 15
+
+//----------------------------------
+// BRUTE FORCE APPROACH
+//----------------------------------
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n = 5;
+    int num = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            cout << num++ << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+//----------------------------------
+// BETTER APPROACH (Using string building)
+//----------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int n = 5;
+    int num = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        string s = "";
+        for (int j = 1; j <= i; j++)
+        {
+            s += to_string(num++) + " ";
+        }
+        cout << s << endl;
+    }
+    return 0;
+}
+
+//----------------------------------
+// BEST APPROACH (Correct + Efficient)
+//----------------------------------
+#include <iostream>
+#include <string>
 using namespace std;
 
-// Default N used for demonstration
-const int N = 5;
+int main()
+{
+    int n = 5;
+    int num = 1;
+    // Rough pre-allocation to reduce reallocations
+    string s;
+    s.reserve(n * n * 3); // safe guess, avoids repeated memory resizing
 
-// Approach 1: Brute Force - straightforward nested loops
-void brute_force() {
-    cout << "Brute Force (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) cout << "*";
-        cout << "\n";
+    for (int i = 1; i <= n; i++)
+    {
+        s = ""; // reset string for each row
+        for (int j = 1; j <= i; j++)
+        {
+            s += to_string(num++) + " ";
+        }
+        cout << s << endl;
     }
-}
-
-// Approach 2: Better - minor improvements (reduce repeated work)
-void better() {
-    cout << "Better (N={}):\n";
-    int n = N;
-    string row(n, '*');
-    for (int i = 0; i < n; ++i) cout << row << "\n";
-}
-
-// Approach 3: Best - most concise / idiomatic (uses algorithms / functions)
-void best() {
-    cout << "Best (N={}):\n";
-    int n = N;
-    for (int i = 0; i < n; ++i) cout << string(n, '*') << "\n";
-}
-
-int main() {
-    cout << "=== Pattern 13 demo ===\n";
-    brute_force();
-    cout << "\n";
-    better();
-    cout << "\n";
-    best();
     return 0;
 }

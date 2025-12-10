@@ -1,33 +1,25 @@
-# Pattern 11 - Striver's Sheet (three approaches)
-# Brute Force -> Better -> Best
+# 1
+# 01
+# 101
+# 0101
+# 10101
 
-N = 5
+# BRUTE FORCE
+n = 5
+for i in range(1, n + 1):
+    line = ""
+    for j in range(1, i + 1):
+        line += str((i + j) % 2)
+    print(line)
 
-# Approach 1: Brute Force - straightforward nested loops
-def brute_force():
-    print("Brute Force (N={}):".format(N))
-    for i in range(N):
-        for j in range(N):
-            print('*', end='')
-        print()
+# BETTER
+n = 5
+for i in range(1, n + 1):
+    print(str(i % 2) * i)
 
-# Approach 2: Better - use precomputed row to reduce repeated concatenation
-def better():
-    print("Better (N={}):".format(N))
-    row = '*' * N
-    for _ in range(N):
-        print(row)
-
-# Approach 3: Best - concise / pythonic
-def best():
-    print("Best (N={}):".format(N))
-    for _ in range(N):
-        print('*' * N)
-
-if __name__ == '__main__':
-    print("=== Pattern 11 demo ===")
-    brute_force()
-    print()
-    better()
-    print()
-    best()
+# BEST
+n = 5
+prev = ""
+for i in range(1, n + 1):
+    prev += str(i % 2)
+    print(prev)

@@ -1,33 +1,30 @@
-# Pattern 17 - Striver's Sheet (three approaches)
-# Brute Force -> Better -> Best
+#     A
+#    ABA
+#   ABCBA
+#  ABCDCBA
+# ABCDEDCBA
 
-N = 5
+# BRUTE FORCE
+n = 5
+for i in range(1, n + 1):
+    line = " " * (n - i)
+    # Left half
+    for j in range(i):
+        line += chr(ord('A') + j)
+    # Right half
+    for j in range(i - 2, -1, -1):
+        line += chr(ord('A') + j)
+    print(line)
 
-# Approach 1: Brute Force - straightforward nested loops
-def brute_force():
-    print("Brute Force (N={}):".format(N))
-    for i in range(N):
-        for j in range(N):
-            print('*', end='')
-        print()
+# BETTER
+n = 5
+base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+for i in range(1, n + 1):
+    left = base[:i]
+    print(f"{' ' * (n - i)}{left}{left[-2::-1]}")
 
-# Approach 2: Better - use precomputed row to reduce repeated concatenation
-def better():
-    print("Better (N={}):".format(N))
-    row = '*' * N
-    for _ in range(N):
-        print(row)
-
-# Approach 3: Best - concise / pythonic
-def best():
-    print("Best (N={}):".format(N))
-    for _ in range(N):
-        print('*' * N)
-
-if __name__ == '__main__':
-    print("=== Pattern 17 demo ===")
-    brute_force()
-    print()
-    better()
-    print()
-    best()
+# BEST
+n = 5
+base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+print(*[f"{' ' * (n - i)}{base[:i]}{base[:i-1][::-1]}" 
+      for i in range(1, n + 1)], sep='\n')
